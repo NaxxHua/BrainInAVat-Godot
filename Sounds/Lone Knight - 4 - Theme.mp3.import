@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b31g1bkg78ve0"
+path="res://.godot/imported/Lone Knight - 4 - Theme.mp3-3cada58bdf0edd89dfbe45b4efb62dd8.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Lone Knight - 4 - Theme.mp3"
+dest_files=["res://.godot/imported/Lone Knight - 4 - Theme.mp3-3cada58bdf0edd89dfbe45b4efb62dd8.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
