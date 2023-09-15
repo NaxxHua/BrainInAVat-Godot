@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bq2ygess0ovny"
+path="res://.godot/imported/Lone Knight - 7 - Cutscene1.mp3-8cf2db47cc05ac5d83c434b02f5233e7.mp3str"
+
+[deps]
+
+source_file="res://Sounds/Lone Knight - 7 - Cutscene1.mp3"
+dest_files=["res://.godot/imported/Lone Knight - 7 - Cutscene1.mp3-8cf2db47cc05ac5d83c434b02f5233e7.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
