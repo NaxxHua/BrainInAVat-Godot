@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="GD Platformer"
+run/main_scene="res://Prefabs/Levels/level_1.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
