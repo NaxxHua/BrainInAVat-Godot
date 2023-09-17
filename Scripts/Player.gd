@@ -8,6 +8,8 @@ var jump = 150
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity = 300
 
+var lives = 3
+
 #func _physics_process(delta):
 #	# Add the gravity.
 #	if not is_on_floor():
@@ -41,6 +43,9 @@ func _process(delta):
 	else:
 		velocity.x = 0
 		$anim.play("Idle")
+	
+	if velocity.y > 350:
+		get_tree().reload_current_scene()
 		
 	if is_on_floor() && Input.is_action_just_pressed("ui_accept"):
 		velocity.y -= jump
@@ -52,3 +57,15 @@ func _process(delta):
 	
 	velocity.y += gravity * delta
 	move_and_slide()
+	
+func hurt():
+	lives -= 1
+	print("Player has enetered", lives)
+	if lives <= 0:
+		get_tree().reload_current_scene()
+	if velocity.x >= 0:
+		velocity.y = -73
+		velocity.x = -73
+	elif velocity.x <= 0:
+		velocity.y = -73
+		velocity.x = 73
