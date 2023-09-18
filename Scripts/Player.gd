@@ -8,7 +8,10 @@ var jump = 150
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity = 300
 
+var canSlash = false
+
 var lives = 3
+var coinCount = 0
 
 #func _physics_process(delta):
 #	# Add the gravity.
@@ -31,29 +34,45 @@ var lives = 3
 
 func _process(delta):
 	var movement = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	if movement != 0:
+	if movement != 0 && canSlash == false:
 		velocity.x += movement * speed * delta
+#		velocity.x = movement * speed
 		$anim.flip_h = movement < 0
+		if $anim.flip_h == true:
+			$Sword.position.x = -17
+		elif $anim.flip_h == false:
+			$Sword.position.x = 15
 		$anim.play("Walk")
-	elif velocity.x == 0 && velocity.y < 0:
+	elif velocity.x == 0 && velocity.y < 0 && canSlash == false:
 		$anim.play("Jump")
 	# For small jump 30 is good but for bigger jump consider 60
-	elif velocity.x == 0 && velocity.y > 30:
+	elif velocity.x == 0 && velocity.y > 30 && canSlash == false:
 		$anim.play("Fall")
-	else:
+	elif movement == 0 && canSlash == false:
 		velocity.x = 0
 		$anim.play("Idle")
 	
 	if velocity.y > 350:
 		get_tree().reload_current_scene()
 		
-	if is_on_floor() && Input.is_action_just_pressed("ui_accept"):
+	if is_on_floor() && Input.is_action_just_pressed("ui_accept") && canSlash == false:
 		velocity.y -= jump
 		$anim.play("Jump")
-	elif velocity.y < 0 && velocity.x != 0:
+	elif velocity.y < 0 && velocity.x != 0 && canSlash == false:
 		$anim.play("Jump")
-	elif velocity.y >0 && velocity.x != 0:
+	elif velocity.y >0 && velocity.x != 0 && canSlash == false:
 		$anim.play("Fall")
+		
+	if Input.is_action_just_pressed("ui_sword"):
+		canSlash = true
+		$Sword/CollisionShape2D.disabled = false
+		$anim.play("Sword")
+		if is_on_floor() && canSlash == true:
+			$anim.play("Sword")
+		elif velocity.y < 0 && velocity.x != 0 && canSlash == true:
+			$anim.play("Sword")
+		elif velocity.y > 0 && velocity.x != 0 && canSlash == true:
+			$anim.play("Sword")
 	
 	velocity.y += gravity * delta
 	move_and_slide()
@@ -69,3 +88,13 @@ func hurt():
 	elif velocity.x <= 0:
 		velocity.y = -73
 		velocity.x = 73
+		
+func coinPickup():
+	coinCount += 1
+	print(coinCount)
+
+
+func _on_anim_animation_finished():
+	if $anim.animation == "Sword":
+		canSlash = false
+		$Sword/CollisionShape2D.disabled = true

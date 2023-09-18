@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dnldnl7v6e1vd"]
+[gd_scene load_steps=13 format=3 uid="uid://dnldnl7v6e1vd"]
 
 [ext_resource type="PackedScene" uid="uid://cgsrjqmlwhsw4" path="res://Prefabs/Platform/platform.tscn" id="1_eyij3"]
 [ext_resource type="PackedScene" uid="uid://dabb625g73cqn" path="res://Prefabs/Player/Player.tscn" id="2_w1nhp"]
@@ -8,10 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://douqgf71wgq36" path="res://3 - Background and Tiles/Branch2.png" id="6_vt7qe"]
 [ext_resource type="Texture2D" uid="uid://dwrscb1oe32n" path="res://3 - Background and Tiles/Hill1.png" id="7_1em67"]
 [ext_resource type="Texture2D" uid="uid://cuodqak3om6cp" path="res://3 - Background and Tiles/Hill2.png" id="8_l50ef"]
-[ext_resource type="Script" path="res://Scripts/Hazards.gd" id="9_5qu64"]
-[ext_resource type="Texture2D" uid="uid://cl8jk6ovt630r" path="res://5 - Hazards/Spikes.png" id="10_mu44r"]
-[ext_resource type="Script" path="res://Scripts/Coin.gd" id="11_hhhht"]
-[ext_resource type="Texture2D" uid="uid://cwpupa5r57ha3" path="res://4 - Coin and pickup/coin.png" id="11_xdgd3"]
+[ext_resource type="PackedScene" uid="uid://bqtsyawiygvd0" path="res://Prefabs/Hazards/hazards.tscn" id="9_wln28"]
+[ext_resource type="PackedScene" uid="uid://b8fywxnl0anpq" path="res://Prefabs/Items/coin.tscn" id="10_ybyiu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_01ki2"]
 texture = ExtResource("3_7ccxo")
@@ -414,66 +412,6 @@ terrain_set_0/terrain_1/name = "Ground 2"
 terrain_set_0/terrain_1/color = Color(0.211765, 0.490196, 0.505882, 1)
 sources/0 = SubResource("TileSetAtlasSource_01ki2")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p6uyg"]
-size = Vector2(21, 5)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_8iku0"]
-radius = 9.0
-
-[sub_resource type="Animation" id="Animation_6f0s2"]
-resource_name = "Idle"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-
-[sub_resource type="Animation" id="Animation_aikj4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_erumj"]
-resource_name = "Picked"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_24hyu"]
-_data = {
-"Idle": SubResource("Animation_6f0s2"),
-"Picked": SubResource("Animation_erumj"),
-"RESET": SubResource("Animation_aikj4")
-}
-
 [node name="Level1" type="Node2D"]
 
 [node name="Background" type="Node" parent="."]
@@ -529,7 +467,7 @@ position = Vector2(763, 300)
 position = Vector2(852, 300)
 
 [node name="Player" parent="." instance=ExtResource("2_w1nhp")]
-position = Vector2(565, 363)
+position = Vector2(568, 373)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-279, -164)
@@ -542,36 +480,14 @@ tile_set = SubResource("TileSet_ecjxf")
 format = 2
 layer_0/tile_data = PackedInt32Array(393220, 131072, 5, 327684, 131072, 4, 262148, 131072, 4, 196612, 131072, 4, 131076, 131072, 3, 393219, 65536, 5, 327683, 65536, 4, 262147, 65536, 4, 196611, 65536, 4, 131075, 65536, 3, 393218, 65536, 5, 327682, 65536, 4, 262146, 65536, 4, 196610, 65536, 4, 131074, 65536, 3, 393217, 65536, 5, 327681, 65536, 4, 262145, 65536, 4, 196609, 65536, 4, 131073, 65536, 3, 393216, 65536, 5, 327680, 65536, 4, 262144, 65536, 4, 196608, 65536, 4, 131072, 65536, 3, 458751, 65536, 5, 393215, 65536, 4, 327679, 65536, 4, 262143, 65536, 4, 196607, 65536, 3, 458750, 65536, 5, 393214, 65536, 4, 327678, 65536, 4, 262142, 65536, 4, 196606, 65536, 3, 458749, 65536, 5, 393213, 65536, 4, 327677, 65536, 4, 262141, 65536, 4, 196605, 65536, 3, 458748, 65536, 5, 393212, 65536, 4, 327676, 65536, 4, 262140, 65536, 4, 196604, 65536, 3, 458747, 65536, 5, 393211, 65536, 4, 327675, 65536, 4, 262139, 65536, 4, 196603, 65536, 3, 458746, 65536, 5, 393210, 65536, 4, 327674, 65536, 4, 262138, 65536, 4, 196602, 65536, 3, 458745, 65536, 5, 393209, 65536, 4, 327673, 65536, 4, 262137, 65536, 4, 196601, 65536, 3, 458744, 65536, 5, 393208, 65536, 4, 327672, 65536, 4, 262136, 65536, 4, 196600, 65536, 3, 458743, 65536, 5, 393207, 65536, 4, 327671, 65536, 4, 262135, 65536, 4, 196599, 65536, 3, 458742, 65536, 5, 393206, 65536, 4, 327670, 65536, 4, 262134, 65536, 4, 196598, 65536, 3, 458741, 0, 5, 393205, 0, 4, 327669, 0, 4, 262133, 0, 4, 196597, 0, 3, 262168, 0, 3, 327704, 0, 5, 327705, 131072, 5, 262169, 131072, 3, 393237, 131072, 5, 327701, 131072, 4, 262165, 131072, 4, 196629, 131072, 4, 131093, 131072, 3, 393236, 65536, 5, 327700, 65536, 4, 262164, 65536, 4, 196628, 65536, 4, 131092, 65536, 3, 393235, 65536, 5, 327699, 65536, 4, 262163, 65536, 4, 196627, 65536, 4, 131091, 65536, 3, 393234, 65536, 5, 327698, 65536, 4, 262162, 65536, 4, 196626, 65536, 4, 131090, 65536, 3, 393233, 65536, 5, 327697, 65536, 4, 262161, 65536, 4, 196625, 65536, 4, 131089, 65536, 3, 393232, 65536, 5, 327696, 65536, 4, 262160, 65536, 4, 196624, 65536, 4, 131088, 65536, 3, 393231, 65536, 5, 327695, 65536, 4, 262159, 65536, 4, 196623, 65536, 4, 131087, 65536, 3, 393230, 65536, 5, 327694, 65536, 4, 262158, 65536, 4, 196622, 65536, 4, 131086, 65536, 3, 393229, 65536, 5, 327693, 65536, 4, 262157, 65536, 4, 196621, 65536, 4, 131085, 65536, 3, 393228, 65536, 5, 327692, 65536, 4, 262156, 65536, 4, 196620, 65536, 4, 131084, 65536, 3, 393227, 65536, 5, 327691, 65536, 4, 262155, 65536, 4, 196619, 65536, 4, 131083, 65536, 3, 393226, 65536, 5, 327690, 65536, 4, 262154, 65536, 4, 196618, 65536, 4, 131082, 65536, 3, 393225, 65536, 5, 327689, 65536, 4, 262153, 65536, 4, 196617, 65536, 4, 131081, 65536, 3, 393224, 65536, 5, 327688, 65536, 4, 262152, 65536, 4, 196616, 65536, 4, 131080, 65536, 3, 393223, 0, 5, 327687, 0, 4, 262151, 0, 4, 196615, 0, 4, 131079, 0, 3, 393254, 131072, 5, 327718, 131072, 4, 262182, 131072, 4, 196646, 131072, 4, 131110, 131072, 3, 393253, 65536, 5, 327717, 65536, 4, 262181, 65536, 4, 196645, 65536, 4, 131109, 65536, 3, 393252, 65536, 5, 327716, 65536, 4, 262180, 65536, 4, 196644, 65536, 4, 131108, 65536, 3, 393251, 65536, 5, 327715, 65536, 4, 262179, 65536, 4, 196643, 65536, 4, 131107, 65536, 3, 393250, 65536, 5, 327714, 65536, 4, 262178, 65536, 4, 196642, 65536, 4, 131106, 65536, 3, 393249, 65536, 5, 327713, 65536, 4, 262177, 65536, 4, 196641, 65536, 4, 131105, 65536, 3, 393248, 65536, 5, 327712, 65536, 4, 262176, 65536, 4, 196640, 65536, 4, 131104, 65536, 3, 393247, 65536, 5, 327711, 65536, 4, 262175, 65536, 4, 196639, 65536, 4, 131103, 65536, 3, 393246, 65536, 5, 327710, 65536, 4, 262174, 65536, 4, 196638, 65536, 4, 131102, 65536, 3, 393245, 65536, 5, 327709, 65536, 4, 262173, 65536, 4, 196637, 65536, 4, 131101, 65536, 3, 393244, 0, 5, 327708, 0, 4, 262172, 0, 4, 196636, 0, 4, 131100, 0, 3)
 
-[node name="Hazards" type="Area2D" parent="."]
-z_index = -1
-position = Vector2(621, 388)
-script = ExtResource("9_5qu64")
+[node name="Hazards" parent="." instance=ExtResource("9_wln28")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazards"]
-position = Vector2(-0.5, -0.5)
-shape = SubResource("RectangleShape2D_p6uyg")
+[node name="Coin" parent="." instance=ExtResource("10_ybyiu")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Hazards"]
-texture = ExtResource("10_mu44r")
+[node name="Coin2" parent="." instance=ExtResource("10_ybyiu")]
+position = Vector2(45, -40)
 
-[node name="Coin" type="Area2D" parent="."]
-script = ExtResource("11_hhhht")
+[node name="Coin3" parent="." instance=ExtResource("10_ybyiu")]
+position = Vector2(90, -1)
 
-[node name="Sprite2D" type="Sprite2D" parent="Coin"]
-position = Vector2(838, 374)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("11_xdgd3")
-hframes = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Coin"]
-position = Vector2(838, 374)
-shape = SubResource("CircleShape2D_8iku0")
-
-[node name="anim" type="AnimationPlayer" parent="Coin"]
-autoplay = "Idle"
-libraries = {
-"": SubResource("AnimationLibrary_24hyu")
-}
-
-[connection signal="body_entered" from="Hazards" to="Hazards" method="_on_body_entered"]
-[connection signal="body_entered" from="Coin" to="Coin" method="_on_body_entered"]
+[node name="Area2D" type="Area2D" parent="."]

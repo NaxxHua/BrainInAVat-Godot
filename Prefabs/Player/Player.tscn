@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dabb625g73cqn"]
+[gd_scene load_steps=23 format=3 uid="uid://dabb625g73cqn"]
 
 [ext_resource type="Texture2D" uid="uid://bgvxn1t0s0gs7" path="res://1 - Player/Idle/Player1.png" id="1_44af0"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_shmho"]
@@ -13,8 +13,12 @@
 [ext_resource type="Texture2D" uid="uid://b2i47wfmc7jx" path="res://1 - Player/Walk/Player8.png" id="9_1l6xy"]
 [ext_resource type="Texture2D" uid="uid://b4k320i5bui48" path="res://1 - Player/Walk/Player9.png" id="10_s2aoc"]
 [ext_resource type="Texture2D" uid="uid://rmm5f6ux74qo" path="res://1 - Player/Walk/Player10.png" id="11_g5h3l"]
+[ext_resource type="Texture2D" uid="uid://cr1ijxwxx437r" path="res://1 - Player/Sword/Player1.png" id="11_r8mju"]
+[ext_resource type="Texture2D" uid="uid://djesy48a0o0jr" path="res://1 - Player/Sword/Player2.png" id="12_0hctn"]
 [ext_resource type="Texture2D" uid="uid://coyv74430mcv4" path="res://1 - Player/Walk/Player11.png" id="12_oxyxs"]
 [ext_resource type="Texture2D" uid="uid://m1m6u5q6ib1d" path="res://1 - Player/Walk/Player12.png" id="13_2ssqi"]
+[ext_resource type="Texture2D" uid="uid://g7p0fva54qts" path="res://1 - Player/Sword/Player3.png" id="13_j85qo"]
+[ext_resource type="Texture2D" uid="uid://cqd12nroye8v2" path="res://1 - Player/Sword/Player4.png" id="14_o3114"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ty2ys"]
 animations = [{
@@ -62,6 +66,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("11_r8mju")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0hctn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_j85qo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_o3114")
+}],
+"loop": false,
+"name": &"Sword",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("9_1l6xy")
 }, {
 "duration": 1.0,
@@ -84,14 +105,30 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k4xd7"]
 size = Vector2(14, 29)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l650k"]
+size = Vector2(11, 27)
+
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(328, 249)
 script = ExtResource("1_shmho")
 
 [node name="anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ty2ys")
-animation = &"Fall"
+animation = &"Sword"
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1.5)
 shape = SubResource("RectangleShape2D_k4xd7")
+
+[node name="Sword" type="Area2D" parent="." groups=["Sword"]]
+position = Vector2(15, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_l650k")
+disabled = true
+debug_color = Color(0.713726, 0.258824, 1, 0.419608)
+
+[connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]
