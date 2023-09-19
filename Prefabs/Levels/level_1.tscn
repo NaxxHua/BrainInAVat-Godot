@@ -658,14 +658,6 @@ layer_0/tile_data = PackedInt32Array(393220, 131072, 5, 327684, 131072, 4, 26214
 
 [node name="Hazards" parent="." instance=ExtResource("9_wln28")]
 
-[node name="Coin" parent="." instance=ExtResource("10_ybyiu")]
-
-[node name="Coin2" parent="." instance=ExtResource("10_ybyiu")]
-position = Vector2(45, -40)
-
-[node name="Coin3" parent="." instance=ExtResource("10_ybyiu")]
-position = Vector2(90, -1)
-
 [node name="Crates" type="Area2D" parent="."]
 position = Vector2(496, 374)
 scale = Vector2(2, 2)
@@ -691,5 +683,14 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Crates/StaticBody2D"]
 shape = SubResource("RectangleShape2D_8vjqm")
 debug_color = Color(0.666667, 0.509804, 0, 0.419608)
+
+[node name="Coin" parent="." instance=ExtResource("10_ybyiu")]
+position = Vector2(753, 373)
+
+[node name="Coin2" parent="." instance=ExtResource("10_ybyiu")]
+position = Vector2(792, 346)
+
+[node name="Coin3" parent="." instance=ExtResource("10_ybyiu")]
+position = Vector2(827, 373)
 
 [connection signal="area_entered" from="Crates" to="Crates" method="_on_area_entered"]
