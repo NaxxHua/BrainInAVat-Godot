@@ -1,19 +1,74 @@
-[gd_scene load_steps=3 format=3 uid="uid://k65rrpxdahkg"]
+[gd_scene load_steps=8 format=3 uid="uid://k65rrpxdahkg"]
 
+[ext_resource type="Script" path="res://Scripts/enemy_1.gd" id="1_iafii"]
 [ext_resource type="Texture2D" uid="uid://tr0000rwxvn0" path="res://5 - Hazards/Enemy/Enemy1.png" id="1_niov1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s757q"]
 size = Vector2(8, 15)
 
+[sub_resource type="Animation" id="Animation_bud1b"]
+resource_name = "Run"
+length = 0.7
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_tkwsi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iwdef"]
+_data = {
+"RESET": SubResource("Animation_tkwsi"),
+"Run": SubResource("Animation_bud1b")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sqyvd"]
+size = Vector2(10, 17)
+
 [node name="Enemy1" type="CharacterBody2D"]
+script = ExtResource("1_iafii")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_niov1")
 hframes = 4
 vframes = 7
+frame = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0.5)
 shape = SubResource("RectangleShape2D_s757q")
 
 [node name="anim" type="AnimationPlayer" parent="."]
+autoplay = "Run"
+libraries = {
+"": SubResource("AnimationLibrary_iwdef")
+}
+
+[node name="PathDetector" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathDetector"]
+position = Vector2(-1, 0.5)
+shape = SubResource("RectangleShape2D_sqyvd")
+debug_color = Color(0.980392, 0, 0.364706, 0.419608)
