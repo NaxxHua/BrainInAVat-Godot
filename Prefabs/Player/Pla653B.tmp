@@ -1,10 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://dabb625g73cqn"]
+[gd_scene load_steps=23 format=3 uid="uid://dabb625g73cqn"]
 
 [ext_resource type="Texture2D" uid="uid://bgvxn1t0s0gs7" path="res://1 - Player/Idle/Player1.png" id="1_44af0"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_shmho"]
 [ext_resource type="Texture2D" uid="uid://c4d723iq882h3" path="res://1 - Player/Idle/Player2.png" id="2_5m4hf"]
 [ext_resource type="Texture2D" uid="uid://br1aud3l5gwca" path="res://1 - Player/Jump and fall/Player14.png" id="2_thutm"]
-[ext_resource type="PackedScene" uid="uid://vjjxxyalmdd0" path="res://Prefabs/UI/hurt_screen.tscn" id="2_vtgga"]
 [ext_resource type="Texture2D" uid="uid://ch4jx75fjlx2r" path="res://1 - Player/Idle/Player3.png" id="3_uhs32"]
 [ext_resource type="Texture2D" uid="uid://bq0hgec1e0kyh" path="res://1 - Player/Idle/Player4.png" id="4_qn6vy"]
 [ext_resource type="Texture2D" uid="uid://bp3e5kql7hn1d" path="res://1 - Player/Idle/Player5.png" id="5_ffdgv"]
@@ -112,7 +111,6 @@ size = Vector2(11, 27)
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(328, 249)
 script = ExtResource("1_shmho")
-HurtScene = ExtResource("2_vtgga")
 
 [node name="anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ty2ys")

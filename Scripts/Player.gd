@@ -8,6 +8,8 @@ var jump = 150
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity = 300
 
+@export var HurtScene: PackedScene
+
 var canSlash = false
 
 var lives = 3
@@ -79,6 +81,8 @@ func _process(delta):
 	
 func hurt():
 	lives -= 1
+	var red = HurtScene.instantiate()
+	add_child(red)
 	print("Player has enetered", lives)
 	if lives <= 0:
 		get_tree().reload_current_scene()

@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://vjjxxyalmdd0"]
+
+[sub_resource type="Animation" id="Animation_paktc"]
+resource_name = "Hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.411765, 0, 0, 0), Color(0.411765, 0, 0, 0.454902), Color(0.411765, 0, 0, 0.678431), Color(0.411765, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s0x34"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.411765, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dpql0"]
+_data = {
+"Hurt": SubResource("Animation_paktc"),
+"RESET": SubResource("Animation_s0x34")
+}
+
+[node name="HurtScreen" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+clip_contents = true
+offset_left = -363.0
+offset_top = -233.0
+offset_right = 1557.0
+offset_bottom = 847.0
+pivot_offset = Vector2(960, 540)
+color = Color(0.411765, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Hurt"
+libraries = {
+"": SubResource("AnimationLibrary_dpql0")
+}
