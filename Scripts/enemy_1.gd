@@ -20,6 +20,9 @@ func onPathEntered(_area2d):
 func _process(delta):
 	velocity.x = direction.x * speed
 	
+	if lives <= 0:
+		velocity = Vector2.ZERO
+	
 	velocity.y += gravity * delta
 	move_and_slide()
 	

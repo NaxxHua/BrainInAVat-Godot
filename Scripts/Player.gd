@@ -15,7 +15,7 @@ var canSlash = false
 var lives = 3
 var coinCount = 0
 
-# 0925check
+
 #func _physics_process(delta):
 #	# Add the gravity.
 #	if not is_on_floor():
