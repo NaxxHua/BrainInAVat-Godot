@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+var coinScene = preload("res://Prefabs/Items/coin.tscn")
 
 var speed = 40
 const JUMP_VELOCITY = -400.0
@@ -43,4 +44,10 @@ func _on_hit_box_area_entered(area):
 		if lives <= 0:
 			$anim.play("Dead")
 			await $anim.animation_finished
+			onDestroyed()
 			queue_free()
+
+func onDestroyed():
+	var coin = coinScene.instantiate()
+	coin.global_transform.origin = global_transform.get_origin()
+	get_tree().get_root().add_child(coin)
