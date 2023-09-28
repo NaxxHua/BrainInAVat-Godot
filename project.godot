@@ -37,6 +37,8 @@ ui_sword={
 2d_physics/layer_2="Hazards"
 2d_physics/layer_3="Ground"
 2d_physics/layer_4="Rewards"
+2d_physics/layer_5="Sword"
+2d_physics/layer_6="Breakable"
 
 [rendering]
 

@@ -126,6 +126,8 @@ shape = SubResource("RectangleShape2D_k4xd7")
 
 [node name="Sword" type="Area2D" parent="." groups=["Sword"]]
 position = Vector2(15, 1)
+collision_layer = 16
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword"]
 position = Vector2(0, 0.5)
