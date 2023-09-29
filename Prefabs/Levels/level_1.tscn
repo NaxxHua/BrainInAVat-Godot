@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dnldnl7v6e1vd"]
+[gd_scene load_steps=27 format=3 uid="uid://dnldnl7v6e1vd"]
 
 [ext_resource type="PackedScene" uid="uid://cgsrjqmlwhsw4" path="res://Prefabs/Platform/platform.tscn" id="1_eyij3"]
 [ext_resource type="PackedScene" uid="uid://dabb625g73cqn" path="res://Prefabs/Player/Player.tscn" id="2_w1nhp"]
@@ -14,6 +14,9 @@
 [ext_resource type="Script" path="res://Scripts/Crates.gd" id="11_l7hko"]
 [ext_resource type="PackedScene" uid="uid://k65rrpxdahkg" path="res://Prefabs/Enemy/enemy_1.tscn" id="13_sxct2"]
 [ext_resource type="PackedScene" uid="uid://c8l5fbp751ye8" path="res://Prefabs/Enemy/path_point.tscn" id="14_h31cs"]
+[ext_resource type="Texture2D" uid="uid://cxnml01k5ndi" path="res://6 - UI/PlayerHeader.png" id="15_gxmhk"]
+[ext_resource type="Texture2D" uid="uid://cwpupa5r57ha3" path="res://4 - Coin and pickup/coin.png" id="16_jowsp"]
+[ext_resource type="Texture2D" uid="uid://b0ytmgsxd8r7y" path="res://6 - UI/HeartSpriteSheetl.png" id="17_ovld4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_01ki2"]
 texture = ExtResource("3_7ccxo")
@@ -706,5 +709,39 @@ position = Vector2(970, 380)
 
 [node name="PathPoint2" parent="." instance=ExtResource("14_h31cs")]
 position = Vector2(730, 380)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerLife" type="Sprite2D" parent="CanvasLayer"]
+z_index = 1
+scale = Vector2(2, 2)
+texture = ExtResource("15_gxmhk")
+centered = false
+
+[node name="CoinLogo" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(1108, 31)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("16_jowsp")
+hframes = 8
+
+[node name="Heart" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(132, 38)
+scale = Vector2(2, 2)
+texture = ExtResource("17_ovld4")
+hframes = 5
+
+[node name="coinText" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -114.0
+offset_top = 20.0
+offset_right = -74.0
+offset_bottom = 43.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "0"
+horizontal_alignment = 2
 
 [connection signal="area_entered" from="Crates" to="Crates" method="_on_area_entered"]
