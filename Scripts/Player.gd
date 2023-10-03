@@ -81,7 +81,7 @@ func _process(delta):
 	move_and_slide()
 	
 func hurt():
-	lives -= 1
+	lives -= 0.25
 	var red = HurtScene.instantiate()
 	add_child(red)
 	print("Player has enetered", lives)
