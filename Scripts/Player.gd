@@ -8,6 +8,8 @@ var jump = 150
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity = 300
 
+const FRICTION = 0.70
+
 @export var HurtScene: PackedScene
 
 var canSlash = false
@@ -40,6 +42,7 @@ func _process(delta):
 	if movement != 0 && canSlash == false:
 		velocity.x += movement * speed * delta
 #		velocity.x = movement * speed
+		velocity.x = clamp(velocity.x, -maxSpeed, maxSpeed)
 		$anim.flip_h = movement < 0
 		if $anim.flip_h == true:
 			$Sword.position.x = -17
@@ -52,7 +55,7 @@ func _process(delta):
 	elif velocity.x == 0 && velocity.y > 30 && canSlash == false:
 		$anim.play("Fall")
 	elif movement == 0 && canSlash == false:
-		velocity.x = 0
+		velocity.x = lerp(velocity.x, 0.0, FRICTION)
 		$anim.play("Idle")
 	
 	if velocity.y > 350:
