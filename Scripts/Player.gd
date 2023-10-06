@@ -3,6 +3,7 @@ extends CharacterBody2D
 var speed = 250
 var maxSpeed = 500
 var jump = 150
+var jumpCount = 0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -40,9 +41,9 @@ var coinCount = 0
 func _process(delta):
 	var movement = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	if movement != 0 && canSlash == false:
-		velocity.x += movement * speed * delta
+		velocity.x += movement * maxSpeed * delta
 #		velocity.x = movement * speed
-		velocity.x = clamp(velocity.x, -maxSpeed, maxSpeed)
+		velocity.x = clamp(velocity.x, -speed, speed)
 		$anim.flip_h = movement < 0
 		if $anim.flip_h == true:
 			$Sword.position.x = -17
@@ -60,13 +61,20 @@ func _process(delta):
 	
 	if velocity.y > 350:
 		get_tree().reload_current_scene()
-		
-	if is_on_floor() && Input.is_action_just_pressed("ui_accept") && canSlash == false:
-		velocity.y -= jump
+	
+	if is_on_floor():
+		jumpCount = 0
+	if Input.is_action_just_pressed("ui_accept") && jumpCount < 2:
+		jumpCount += 1
+		velocity.y -= clamp(velocity.y, jump, jump)
+	if Input.is_action_just_pressed("ui_accept") && jumpCount > 2:
+		jumpCount = 0
+	if !is_on_floor() && Input.is_action_just_pressed("ui_accept") && canSlash == false && jumpCount < 2:
+		velocity.y -= clamp(velocity.y, jump, jump)
 		$anim.play("Jump")
-	elif velocity.y < 0 && velocity.x != 0 && canSlash == false:
+	elif !is_on_floor() && velocity.y < 0 && velocity.x != 0 && canSlash == false:
 		$anim.play("Jump")
-	elif velocity.y >0 && velocity.x != 0 && canSlash == false:
+	elif !is_on_floor() && velocity.y >0 && velocity.x != 0 && canSlash == false:
 		$anim.play("Fall")
 		
 	if Input.is_action_just_pressed("ui_sword"):
