@@ -42,7 +42,7 @@ var coinCount = 0
 
 func _process(delta):
 	var movement = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	if movement != 0 && canSlash == false:
+	if !nextToWall() && movement != 0 && canSlash == false:
 		velocity.x += movement * maxSpeed * delta
 #		velocity.x = movement * speed
 		velocity.x = clamp(velocity.x, -speed, speed)
@@ -57,7 +57,10 @@ func _process(delta):
 	# For small jump 30 is good but for bigger jump consider 60
 	elif velocity.x == 0 && velocity.y > 30 && canSlash == false:
 		$anim.play("Fall")
-	elif movement == 0 && canSlash == false:
+#	elif nextToWall() && movement == 0 && canSlash == false:
+#		velocity.x = lerp(velocity.x, 0.0, FRICTION)
+#		$anim.play("WallSlide")
+	elif !nextToWall() && movement == 0 && canSlash == false:
 		velocity.x = lerp(velocity.x, 0.0, FRICTION)
 		$anim.play("Idle")
 	
@@ -69,11 +72,25 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_accept") && jumpCount < 2:
 		jumpCount += 1
 		velocity.y -= clamp(velocity.y, jump, jump)
+	
+	# This is for wall jump
 	if Input.is_action_just_pressed("ui_accept"):
 		if !is_on_floor() && RightWall():
 			velocity.y = clamp(velocity.y, wallJump, wallJump)
+			velocity.x -= 180
 		elif !is_on_floor() && LeftWall():
 			velocity.y = clamp(velocity.y, wallJump, wallJump)
+			velocity.x += 180
+	
+	# This is for wall slide
+	if RightWall() && velocity.y > 30:
+		velocity.y = 15
+		$anim.flip_h = true
+		$anim.play("WallSlide")
+	if LeftWall() && velocity.y > 30:
+		velocity.y = 15
+		$anim.flip_h = false
+		$anim.play("WallSlide")
 		
 	if Input.is_action_just_pressed("ui_accept") && jumpCount > 2:
 		jumpCount = 0
