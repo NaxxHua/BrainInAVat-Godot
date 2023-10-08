@@ -33,6 +33,7 @@ func _process(delta):
 func _on_hit_box_body_entered(body):
 	if body.has_method("hurt"):
 		body.hurt()
+		
 
 
 func _on_hit_box_area_entered(area):

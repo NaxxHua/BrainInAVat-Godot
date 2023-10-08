@@ -5,6 +5,8 @@ var maxSpeed = 500
 var jump = 150
 var jumpCount = 0
 
+var wallJump = -40
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 #var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var gravity = 300
@@ -62,11 +64,17 @@ func _process(delta):
 	if velocity.y > 350:
 		get_tree().reload_current_scene()
 	
-	if is_on_floor():
+	if is_on_floor() or nextToWall():
 		jumpCount = 0
 	if Input.is_action_just_pressed("ui_accept") && jumpCount < 2:
 		jumpCount += 1
 		velocity.y -= clamp(velocity.y, jump, jump)
+	if Input.is_action_just_pressed("ui_accept"):
+		if !is_on_floor() && RightWall():
+			velocity.y = clamp(velocity.y, wallJump, wallJump)
+		elif !is_on_floor() && LeftWall():
+			velocity.y = clamp(velocity.y, wallJump, wallJump)
+		
 	if Input.is_action_just_pressed("ui_accept") && jumpCount > 2:
 		jumpCount = 0
 	if !is_on_floor() && Input.is_action_just_pressed("ui_accept") && canSlash == false && jumpCount < 2:
@@ -104,6 +112,15 @@ func hurt():
 	elif velocity.x <= 0:
 		velocity.y = -73
 		velocity.x = 73
+
+func nextToWall():
+	return RightWall() or LeftWall()
+
+func RightWall():
+	return $RightWall.is_colliding()
+
+func LeftWall():
+	return $LeftWall.is_colliding()
 		
 func coinPickup():
 	coinCount += 1
