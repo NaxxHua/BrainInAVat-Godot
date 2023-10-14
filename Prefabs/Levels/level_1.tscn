@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dnldnl7v6e1vd"]
+[gd_scene load_steps=29 format=3 uid="uid://dnldnl7v6e1vd"]
 
 [ext_resource type="PackedScene" uid="uid://cgsrjqmlwhsw4" path="res://Prefabs/Platform/platform.tscn" id="1_eyij3"]
 [ext_resource type="PackedScene" uid="uid://dabb625g73cqn" path="res://Prefabs/Player/Player.tscn" id="2_w1nhp"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://cxnml01k5ndi" path="res://6 - UI/PlayerHeader.png" id="15_gxmhk"]
 [ext_resource type="Texture2D" uid="uid://cwpupa5r57ha3" path="res://4 - Coin and pickup/coin.png" id="16_jowsp"]
 [ext_resource type="Texture2D" uid="uid://b0ytmgsxd8r7y" path="res://6 - UI/HeartSpriteSheetl.png" id="17_ovld4"]
+[ext_resource type="PackedScene" uid="uid://dbqff5wdwtxt8" path="res://Prefabs/Platform/breaking_platform.tscn" id="19_nsdsm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_01ki2"]
 texture = ExtResource("3_7ccxo")
@@ -745,5 +746,11 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "0"
 horizontal_alignment = 2
+
+[node name="Breaking Platform" parent="." instance=ExtResource("19_nsdsm")]
+position = Vector2(792, 354)
+
+[node name="Breaking Platform2" parent="." instance=ExtResource("19_nsdsm")]
+position = Vector2(808, 354)
 
 [connection signal="area_entered" from="Crates" to="Crates" method="_on_area_entered"]
