@@ -64,10 +64,11 @@ func _process(delta):
 		velocity.x = lerp(velocity.x, 0.0, FRICTION)
 		$anim.play("Idle")
 	
-	if velocity.y > 350:
-		get_tree().reload_current_scene()
+	# If the player falls for a certain period of time reset player
+	#if velocity.y > 350:
+	#	get_tree().reload_current_scene()
 	
-	if is_on_floor() or nextToWall():
+	if is_on_floor() or nextToWall(): 
 		jumpCount = 0
 	if Input.is_action_just_pressed("ui_accept") && jumpCount < 2:
 		jumpCount += 1
@@ -83,11 +84,11 @@ func _process(delta):
 			velocity.x += 180
 	
 	# This is for wall slide
-	if RightWall() && velocity.y > 30:
+	if RightWall() && velocity.y > 30 && Input.get_action_strength("ui_right"):
 		velocity.y = 15
 		$anim.flip_h = true
 		$anim.play("WallSlide")
-	if LeftWall() && velocity.y > 30:
+	if LeftWall() && velocity.y > 30 && Input.get_action_strength("ui_left"):
 		velocity.y = 15
 		$anim.flip_h = false
 		$anim.play("WallSlide")
