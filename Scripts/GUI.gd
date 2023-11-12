@@ -13,14 +13,14 @@ func _ready():
 		$Heart.add_child(new_heart)
 		
 	
-func _physics_process(delta):
+func _physics_process(_delta):
 	$coinText.text = str(player.coinCount)
 	
 	for heart in $Heart.get_children():
 		var index = heart.get_index()
 		
 		var x = (index % HEART_ROW_SIZE) * HEART_OFFSET
-		var y = (index / HEART_ROW_SIZE) * HEART_OFFSET
+		var y = (index / HEART_ROW_SIZE) * HEART_OFFSET * 1.0
 		heart.position = Vector2(x, y)
 		
 		var lastHeart = floor(player.lives)

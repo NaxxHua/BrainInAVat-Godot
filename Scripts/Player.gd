@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-var speed = 250
-var maxSpeed = 500
+var speed = 150
+var maxSpeed = 200
 var jump = 150
 var jumpCount = 0
 
@@ -85,13 +85,19 @@ func _process(delta):
 	
 	# This is for wall slide
 	if RightWall() && velocity.y > 30 && Input.get_action_strength("ui_right"):
-		velocity.y = 15
+		velocity.y = 50
 		$anim.flip_h = true
-		$anim.play("WallSlide")
+		if !is_on_wall():
+			$anim.play("Idle")
+		else:
+			$anim.play("WallSlide")
 	if LeftWall() && velocity.y > 30 && Input.get_action_strength("ui_left"):
-		velocity.y = 15
+		velocity.y = 50
 		$anim.flip_h = false
-		$anim.play("WallSlide")
+		if !is_on_wall():
+			$anim.play("Idle")
+		else:
+			$anim.play("WallSlide")
 		
 	if Input.is_action_just_pressed("ui_accept") && jumpCount > 2:
 		jumpCount = 0

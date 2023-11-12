@@ -112,8 +112,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k4xd7"]
-size = Vector2(14, 29)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l5nom"]
+radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l650k"]
 size = Vector2(11, 27)
@@ -126,11 +126,11 @@ HurtScene = ExtResource("2_vtgga")
 
 [node name="anim" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ty2ys")
-animation = &"WallSlide"
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 1.5)
-shape = SubResource("RectangleShape2D_k4xd7")
+shape = SubResource("CapsuleShape2D_l5nom")
 
 [node name="Sword" type="Area2D" parent="." groups=["Sword"]]
 position = Vector2(15, 1)
@@ -145,12 +145,12 @@ debug_color = Color(0.713726, 0.258824, 1, 0.419608)
 
 [node name="RightWall" type="RayCast2D" parent="."]
 rotation = -1.5708
-target_position = Vector2(0, 20)
+target_position = Vector2(-4.57764e-05, 14)
 collision_mask = 16
 
 [node name="LeftWall" type="RayCast2D" parent="."]
 rotation = 1.5708
-target_position = Vector2(0, 20)
+target_position = Vector2(6.10352e-05, 16)
 collision_mask = 16
 
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]
